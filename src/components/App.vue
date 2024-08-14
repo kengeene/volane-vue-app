@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <input type="text" v-model="input" placeholder="Type here to add a new todo" style="padding: 10px;border-radius: 5px;">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <input type="text" v-model="input" placeholder="Type here to add a new todo" style="padding: 10px;margin:10px;border-radius: 5px;width: 300px;">
     <button @click="addTodo(input)" style="display: block;" :disabled="!input">Add Todo Item</button>
     <hr/>
     <div>
@@ -8,7 +8,7 @@
       <input type="checkbox" v-model="filterPending"/><label>All Pending</label>
     </div>
     <p>Click on a todo to edit it</p>
-    <div v-for="(todo, index) in filteredTodos" :key="todo.id" style="display: block;">
+    <div v-for="(todo, index) in filteredTodos" :key="todo.id" style="display: flex;border: 1px solid white;padding: 10px;border-radius: 5px;margin: 10px;justify-content: space-around;">
       <div>
         <input type="checkbox" v-model="todo.isCompleted" @change="editTodo(index, 'isCompleted', true)"/>
         <span v-if="!todo.isEditing" @click="editTodo(index, 'isEditing', true)">{{ todo.todo }}</span>
@@ -24,7 +24,7 @@
 
 <script>
 import { computed, ref, watch } from 'vue';
-import { useTodosStore } from './store/index.js';
+import { useTodosStore } from '../store/index.js';
 import { storeToRefs } from 'pinia'
 
 export default {
