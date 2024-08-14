@@ -47,11 +47,15 @@ export default {
     });
 
     watch(filterCompleted, (newValue) => {
+      if(newValue === true){
       filterPending.value = !newValue
+      }
     })
 
       watch(filterPending, (newValue) => {
-      filterCompleted.value = !newValue
+      if(newValue === true){
+        filterCompleted.value = !newValue
+      }
     })
 
 
