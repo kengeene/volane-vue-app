@@ -31,15 +31,14 @@ export default {
     const filterPending = ref(false)
 
     const filteredTodos = computed(() => {
-      return store.todos.filter((todo) => {
-        if(filterCompleted.value === true){
+            if(filterCompleted.value === true){
           return store.todos.filter(todo=> todo.isCompleted)
         }
         if(filterPending.value === true){
           return store.todos.filter(todo=> !todo.isCompleted)
         }
-        return todo
-      });
+      return store.todos.filter((todo) => todo
+  );
     });
 
 
