@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useTodosStore } from './store/index.js';
 import { storeToRefs } from 'pinia'
 
@@ -40,6 +40,14 @@ export default {
       return store.todos.filter((todo) => todo
   );
     });
+
+    watch(filterCompleted, (newValue) => {
+      filterPending.value = !newValue
+    })
+
+      watch(filterPending, (newValue) => {
+      filterCompleted.value = !newValue
+    })
 
 
 
