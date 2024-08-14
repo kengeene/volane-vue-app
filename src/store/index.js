@@ -7,6 +7,7 @@ import { ref, watch } from "vue";
     const editTodo = (index, field, value) => {
         try{
             todos.value[index][field] = value;
+            if (field === 'todo') todos.value[index]["isEditing"] = false;
             localStorage.setItem("todos", JSON.stringify(todos.value));
         } catch(error){
             console.log('error', error)

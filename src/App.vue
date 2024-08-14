@@ -1,16 +1,21 @@
 <template>
   <div>
-    <input type="text" v-model="input">
+    <input type="text" v-model="input" placeholder="Type here to add a new todo" style="padding: 10px;border-radius: 5px;">
     <button @click="addTodo(input)" style="display: block;" :disabled="!input">Add Todo Item</button>
     <hr/>
     <div>
       <input type="checkbox" v-model="filterCompleted"/><label>All Completed</label>
       <input type="checkbox" v-model="filterPending"/><label>All Pending</label>
     </div>
+    <p>Click on a todo to edit it</p>
     <div v-for="(todo, index) in filteredTodos" :key="todo.id" style="display: block;">
       <div>
         <input type="checkbox" v-model="todo.isCompleted" @change="editTodo(index, 'isCompleted', true)"/>
-        <span>{{ todo.todo }}</span>
+        <span v-if="!todo.isEditing" @click="editTodo(index, 'isEditing', true)">{{ todo.todo }}</span>
+        <div v-else>
+        <input v-model="todo.todo" @keyup.enter="editTodo(index, 'todo', true)" style="width: 100%;border-radius: 5px;padding: 10px;">
+        <button @click="editTodo(index, 'todo', todo.todo)">Edit</button>
+        </div>
         <span @click="deleteTodo(todo.id)" style="cursor: pointer;">Delete</span>
       </div>
     </div>
