@@ -1,30 +1,28 @@
 <template>
   <div>
     <input type="text" v-model="input">
-    <button @click="addTodo()" style="display: block;">Add Todo Item</button>
+    <button @click="addTodo(input)" style="display: block;">Add Todo Item</button>
     <hr/>
     <div>
-      <span v-for="(todo, index) in todos" :key="index" style="display: block;">{{ todo }}</span>
+      <span v-for="(todo, index) in todoList" :key="index" style="display: block;">{{ todo }}</span>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
-
+import { computed, ref } from 'vue';
+import { useTodosStore } from './store/index.js';
 export default {
   setup () {
     const input = ref('')
-    const todos = ref([])
-    const addTodo = () => {
-      todos.value.push(input.value)
-      input.value = ''
-    }
+    const store = useTodosStore();
+    const { addTodo } = useTodosStore();
+
 
     return {
       input,
-      todos,
-      addTodo
+      todoList: computed(() => store.todos),
+      addTodo,
     }
   }
 }
