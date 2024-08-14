@@ -11,12 +11,12 @@
     <div v-for="(todo, index) in filteredTodos" :key="todo.id" class="todo__item">
       <div>
         <input type="checkbox" v-model="todo.isCompleted" @change="editTodo(index, 'isCompleted', true)"/>
-        <span v-if="!todo.isEditing" @click="editTodo(index, 'isEditing', true)">{{ todo.todo }}</span>
+        <span v-if="!todo.isEditing" @click="editTodo(index, 'isEditing', true)" style="padding-left: 5px;">{{ todo.todo }}</span>
         <div v-else>
         <input v-model="todo.todo" @keyup.enter="editTodo(index, 'todo', true)" class="todo__input">
         <button @click="editTodo(index, 'todo', todo.todo)">Edit</button>
         </div>
-        <span @click="deleteTodo(todo.id)" style="cursor: pointer;">Delete</span>
+        <span @click="deleteTodo(todo.id)" style="cursor: pointer;padding-left: 5px;text-decoration: underline;color: red;">Delete</span>
       </div>
     </div>
   </div>
