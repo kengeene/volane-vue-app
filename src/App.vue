@@ -32,11 +32,11 @@ export default {
 
     const filteredTodos = computed(() => {
       return store.todos.filter((todo) => {
-        if(filterCompleted.value){
-          return completedTodos
+        if(filterCompleted.value === true){
+          return store.todos.filter(todo=> todo.isCompleted)
         }
-        if(filterPending.value){
-          return pendingTodos
+        if(filterPending.value === true){
+          return store.todos.filter(todo=> !todo.isCompleted)
         }
         return todo
       });
@@ -51,7 +51,9 @@ export default {
       editTodo: store.editTodo,
       deleteTodo: store.deleteTodo,
       filterCompleted,
-      filterPending
+      filterPending,
+      completedTodos,
+      pendingTodos
     }
   }
 }

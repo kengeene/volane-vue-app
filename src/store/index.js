@@ -22,8 +22,8 @@ import { ref, watch } from "vue";
         }
     };
 
-    const completedTodos = todos.value.filter((todo) => todo.isCompleted);
-    const pendingTodos = todos.value.filter((todo) => !todo.isCompleted);
+    const completedTodos = todos.value.filter((todo) => todo.isCompleted === true);
+    const pendingTodos = todos.value.filter((todo) => todo.isCompleted !== true);
 
 
     const addTodo = (input) => {
